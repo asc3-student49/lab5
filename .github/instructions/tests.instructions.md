@@ -1,5 +1,6 @@
 ---
 applyTo: "tests/**/*.py"
+excludeAgent: "code-review"
 ---
 
 # Test Instructions
