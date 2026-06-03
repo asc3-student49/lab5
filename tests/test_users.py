@@ -37,3 +37,20 @@ def test_get_user_returns_user(client):
 def test_get_user_not_found(client):
     response = client.get("/api/users/999")
     assert response.status_code == 404
+
+
+def test_delete_user_removes_user(client):
+    created = client.post(
+        "/api/users", json={"username": "ada", "email": "ada@example.com"}
+    ).get_json()
+    response = client.delete(f"/api/users/{created['id']}")
+    assert response.status_code == 200
+    assert response.get_json()["id"] == created["id"]
+
+    get_response = client.get(f"/api/users/{created['id']}")
+    assert get_response.status_code == 404
+
+
+def test_delete_user_not_found(client):
+    response = client.delete("/api/users/999")
+    assert response.status_code == 404
