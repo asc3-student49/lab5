@@ -17,6 +17,9 @@ class UserStore:
     def get(self, user_id):
         return self._users.get(user_id)
 
+    def delete(self, user_id):
+        return self._users.pop(user_id, None)
+
     def list_all(self):
         return list(self._users.values())
 

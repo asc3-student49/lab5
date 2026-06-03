@@ -24,3 +24,11 @@ def get_user(user_id):
     if user is None:
         return jsonify({"error": "user not found"}), 404
     return jsonify(asdict(user)), 200
+
+
+@users_bp.route("/<int:user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    user = store.delete(user_id)
+    if user is None:
+        return jsonify({"error": "user not found"}), 404
+    return jsonify(asdict(user)), 200
